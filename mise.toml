@@ -2,20 +2,20 @@
 rust = "stable"
 
 [tasks.default]
-description = "Build and launch the Insta360 Link Controller desktop GUI"
+description = "Build and launch the Open 360 Link desktop GUI"
 depends = ["gui"]
 
 [tasks.gui]
-description = "Build and launch the Insta360 Link Controller desktop GUI"
-run = "cargo run --release -p insta360-link-gui"
+description = "Build and launch the Open 360 Link desktop GUI"
+run = "cargo run --release -p open-360-link-gui"
 
 [tasks.cli]
-description = "Run the insta360-link-ctl CLI (e.g. mise run cli -- info)"
-run = "cargo run --release -p insta360-link-cli --"
+description = "Run the open-360-link-ctl CLI (e.g. mise run cli -- info)"
+run = "cargo run --release -p open-360-link-cli --"
 
 [tasks.server]
 description = "Start the HTTP & WebSocket remote control server on 127.0.0.1:8360"
-run = "cargo run --release -p insta360-link-server --"
+run = "cargo run --release -p open-360-link-server --"
 
 [tasks.build]
 description = "Build all workspace crates in release mode"
@@ -27,7 +27,7 @@ run = "cargo test --workspace"
 
 [tasks.self-test]
 description = "Run the automated live hardware GUI verification sequence"
-run = "INSTA360_GUI_SELF_TEST=1 cargo run --release -p insta360-link-gui"
+run = "INSTA360_GUI_SELF_TEST=1 cargo run --release -p open-360-link-gui"
 
 [tasks.package-release]
 description = "Build and package release binaries for a target (usage: mise run package-release [target] [version])"
@@ -67,15 +67,15 @@ case "$TARGET" in
   *)                          ASSET_SUFFIX="$TARGET";      EXT="tar.gz" ;;
 esac
 
-STAGE_NAME="insta360-link-controller-v${VERSION}-${ASSET_SUFFIX}"
+STAGE_NAME="open-360-link-v${VERSION}-${ASSET_SUFFIX}"
 STAGE_DIR="dist/${STAGE_NAME}"
 rm -rf "$STAGE_DIR"
 mkdir -p "$STAGE_DIR"
 
 if [ "$EXT" = "zip" ]; then
-  cp "target/${TARGET}/release/insta360-link-gui.exe" "$STAGE_DIR/"
-  cp "target/${TARGET}/release/insta360-link-ctl.exe" "$STAGE_DIR/"
-  cp "target/${TARGET}/release/insta360-link-server.exe" "$STAGE_DIR/"
+  cp "target/${TARGET}/release/open-360-link-gui.exe" "$STAGE_DIR/"
+  cp "target/${TARGET}/release/open-360-link-ctl.exe" "$STAGE_DIR/"
+  cp "target/${TARGET}/release/open-360-link-server.exe" "$STAGE_DIR/"
   cp README.md "$STAGE_DIR/"
   python3 -c '
 import pathlib, sys, zipfile
@@ -88,9 +88,9 @@ with zipfile.ZipFile(out_zip, "w", zipfile.ZIP_DEFLATED) as zf:
 ' "$STAGE_DIR" "dist/${STAGE_NAME}.zip"
   echo "Packaged dist/${STAGE_NAME}.zip"
 else
-  cp "target/${TARGET}/release/insta360-link-gui" "$STAGE_DIR/"
-  cp "target/${TARGET}/release/insta360-link-ctl" "$STAGE_DIR/"
-  cp "target/${TARGET}/release/insta360-link-server" "$STAGE_DIR/"
+  cp "target/${TARGET}/release/open-360-link-gui" "$STAGE_DIR/"
+  cp "target/${TARGET}/release/open-360-link-ctl" "$STAGE_DIR/"
+  cp "target/${TARGET}/release/open-360-link-server" "$STAGE_DIR/"
   cp README.md "$STAGE_DIR/"
   cp -r assets "$STAGE_DIR/"
   tar -C dist -czf "dist/${STAGE_NAME}.tar.gz" "$STAGE_NAME"
@@ -107,7 +107,7 @@ set -euo pipefail
 VER="${1:-0.1.0}"
 VER="${VER#v}"
 env -u GITHUB_TOKEN -u GH_TOKEN -u GITHUB_AUTH_TOKEN gh workflow run release.yml \
-  --repo lucasoskorep/insta360-link-controller \
+  --repo lucasoskorep/open-360-link \
   --ref master \
   -f version="$VER"
 echo "Triggered release workflow on master for v${VER}"

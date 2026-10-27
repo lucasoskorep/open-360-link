@@ -1,16 +1,16 @@
 [package]
-name = "insta360-link-gui"
+name = "open-360-link-gui"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Cross-platform pure-Rust desktop GUI controller for Insta360 Link, Link 2, and Link 2C"
+description = "Open 360 Link: Cross-platform pure-Rust desktop GUI controller for Insta360 Link, Link 2, and Link 2C"
 
 [[bin]]
-name = "insta360-link-gui"
+name = "open-360-link-gui"
 path = "src/main.rs"
 
 [dependencies]
-insta360-link-protocol = { path = "../insta360-link-protocol" }
+open-360-link-protocol = { path = "../open-360-link-protocol" }
 eframe.workspace = true
 egui.workspace = true
 image = { version = "0.25", default-features = false, features = ["png"] }

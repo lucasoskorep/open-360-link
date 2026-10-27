@@ -1,16 +1,16 @@
 [package]
-name = "insta360-link-server"
+name = "open-360-link-server"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Cross-platform HTTP REST & WebSocket remote control server for Insta360 Link cameras"
+description = "Open 360 Link: Cross-platform HTTP REST & WebSocket remote control server for Insta360 Link cameras"
 
 [[bin]]
-name = "insta360-link-server"
+name = "open-360-link-server"
 path = "src/main.rs"
 
 [dependencies]
-insta360-link-protocol = { path = "../insta360-link-protocol" }
+open-360-link-protocol = { path = "../open-360-link-protocol" }
 clap.workspace = true
 tokio.workspace = true
 axum.workspace = true

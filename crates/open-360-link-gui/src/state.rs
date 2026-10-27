@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
 use egui::{ColorImage, Pos2, TextureHandle};
-pub use insta360_link_protocol::*;
+pub use open_360_link_protocol::*;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::time::Instant;
@@ -285,7 +285,7 @@ pub struct CameraAppState {
     pub last_saved_settings: Option<PersistedAppSettings>,
 }
 
-/// User settings persisted across sessions in `~/.config/insta360-link-controller/settings.json`.
+/// User settings persisted across sessions in `~/.config/open-360-link/settings.json`.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PersistedAppSettings {
     pub format_preset: VideoFormatPreset,
@@ -325,12 +325,10 @@ pub struct PersistedAppSettings {
 }
 
 impl PersistedAppSettings {
-    pub fn config_path() -> PathBuf {
+    fn base_config_dir() -> PathBuf {
         if let Ok(xdg) = std::env::var("XDG_CONFIG_HOME") {
             if !xdg.trim().is_empty() {
-                return PathBuf::from(xdg)
-                    .join("insta360-link-controller")
-                    .join("settings.json");
+                return PathBuf::from(xdg);
             }
         }
         let home = std::env::var("HOME")
@@ -338,14 +336,29 @@ impl PersistedAppSettings {
             .map(PathBuf::from)
             .unwrap_or_else(|_| PathBuf::from("."));
         home.join(".config")
-            .join("insta360-link-controller")
+    }
+
+    pub fn config_path() -> PathBuf {
+        Self::base_config_dir()
+            .join("open-360-link")
             .join("settings.json")
     }
 
     pub fn load() -> Option<Self> {
         let path = Self::config_path();
-        let data = std::fs::read_to_string(path).ok()?;
-        serde_json::from_str(&data).ok()
+        if let Ok(data) = std::fs::read_to_string(&path) {
+            if let Ok(parsed) = serde_json::from_str(&data) {
+                return Some(parsed);
+            }
+        }
+        // Automatic migration from legacy `~/.config/insta360-link-controller/settings.json`
+        let legacy = Self::base_config_dir()
+            .join("insta360-link-controller")
+            .join("settings.json");
+        let data = std::fs::read_to_string(legacy).ok()?;
+        let parsed: Self = serde_json::from_str(&data).ok()?;
+        parsed.save();
+        Some(parsed)
     }
 
     pub fn save(&self) {

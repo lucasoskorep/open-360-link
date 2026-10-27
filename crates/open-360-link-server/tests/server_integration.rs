@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 use std::net::SocketAddr;
 
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     AudioCaptureMode, CameraModel, CompositionStyle, ExtendFunction, FilterMode, Gesture,
     GestureFunction, TrackSpeed, VideoMode,
 };
-use insta360_link_server::{
+use open_360_link_server::{
     build_router, new_mock_state, AudioRequest, CameraStateSnapshot, ImageRequest, ModeRequest,
     PresetRequest, PtzRequest, SystemRequest, TrackingRequest,
 };

@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     ct_selectors, pu_selectors, xu1_selectors, xu2_selectors, CameraModel, DiscoveredCamera,
     MockCameraTransport, NusbTransport, TransportError, UvcControlPacketHeader,
     UvcControlTransport, UvcRequest, UvcUnitIds,

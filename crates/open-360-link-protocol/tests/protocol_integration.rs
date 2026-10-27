@@ -1,4 +1,4 @@
-use insta360_link_protocol::*;
+use open_360_link_protocol::*;
 
 /// Builds a synthetic USB Configuration Descriptor containing:
 /// - Standard Interface Descriptor for UVC VideoControl (`bInterfaceNumber = 2`, `CC_VIDEO = 0x0e`, `SC_VIDEOCONTROL = 0x01`)

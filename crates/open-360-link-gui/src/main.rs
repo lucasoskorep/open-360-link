@@ -7,7 +7,7 @@ mod video_engine;
 use std::time::{Duration, Instant};
 
 use eframe::egui::{self, Align2, Color32, FontId, Margin, Pos2, Rect, RichText, Rounding, Stroke, Vec2};
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     list_connected_cameras, CameraModel, DiscoveredCamera, Insta360CameraController,
     MockCameraTransport, NusbTransport, PowerLineFrequency, VideoMode, VideoModeAuxData,
 };
@@ -181,41 +181,41 @@ impl Insta360App {
         if let Ok(ext) = self.controller.get_extend_function_status() {
             for (func, en) in ext {
                 match func {
-                    insta360_link_protocol::ExtendFunction::AiZoom => {
+                    open_360_link_protocol::ExtendFunction::AiZoom => {
                         self.state.ai_zoom_enabled = en
                     }
-                    insta360_link_protocol::ExtendFunction::AllGestures => {
+                    open_360_link_protocol::ExtendFunction::AllGestures => {
                         self.state.enable_all_gestures = en
                     }
-                    insta360_link_protocol::ExtendFunction::AutoTracking => {
+                    open_360_link_protocol::ExtendFunction::AutoTracking => {
                         self.state.enable_auto_tracking = en
                     }
-                    insta360_link_protocol::ExtendFunction::SingleTapTracking => {
+                    open_360_link_protocol::ExtendFunction::SingleTapTracking => {
                         self.state.enable_single_tap_tracking = en
                     }
-                    insta360_link_protocol::ExtendFunction::Hdr => self.state.hdr_enabled = en,
-                    insta360_link_protocol::ExtendFunction::HorizontalMirror => {
+                    open_360_link_protocol::ExtendFunction::Hdr => self.state.hdr_enabled = en,
+                    open_360_link_protocol::ExtendFunction::HorizontalMirror => {
                         self.state.horizontal_mirror = en
                     }
-                    insta360_link_protocol::ExtendFunction::VerticalMirror => {
+                    open_360_link_protocol::ExtendFunction::VerticalMirror => {
                         self.state.vertical_mirror = en
                     }
-                    insta360_link_protocol::ExtendFunction::VerticalMode => {
+                    open_360_link_protocol::ExtendFunction::VerticalMode => {
                         self.state.vertical_resolution_mode = en
                     }
-                    insta360_link_protocol::ExtendFunction::ForcedVertical => {
+                    open_360_link_protocol::ExtendFunction::ForcedVertical => {
                         self.state.forced_vertical_lock = en
                     }
-                    insta360_link_protocol::ExtendFunction::LowResolution => {
+                    open_360_link_protocol::ExtendFunction::LowResolution => {
                         self.state.low_resolution_mode = en
                     }
-                    insta360_link_protocol::ExtendFunction::SmartAdjustment => {
+                    open_360_link_protocol::ExtendFunction::SmartAdjustment => {
                         self.state.smart_adjustment = en
                     }
-                    insta360_link_protocol::ExtendFunction::StartupParams => {
+                    open_360_link_protocol::ExtendFunction::StartupParams => {
                         self.state.startup_params_enabled = en
                     }
-                    insta360_link_protocol::ExtendFunction::UltimatePrivacyMode => {
+                    open_360_link_protocol::ExtendFunction::UltimatePrivacyMode => {
                         self.state.ultimate_privacy = en
                     }
                     _ => {}
@@ -231,11 +231,11 @@ impl Insta360App {
         if let Ok(gestures) = self.controller.get_gesture_status() {
             for (g, en) in gestures {
                 match g {
-                    insta360_link_protocol::Gesture::Ok => self.state.use_gesture_ok = en,
-                    insta360_link_protocol::Gesture::Palm => self.state.use_gesture_palm = en,
-                    insta360_link_protocol::Gesture::LShape => self.state.use_gesture_l = en,
-                    insta360_link_protocol::Gesture::VShape => self.state.use_gesture_v = en,
-                    insta360_link_protocol::Gesture::Rock => self.state.use_gesture_rock = en,
+                    open_360_link_protocol::Gesture::Ok => self.state.use_gesture_ok = en,
+                    open_360_link_protocol::Gesture::Palm => self.state.use_gesture_palm = en,
+                    open_360_link_protocol::Gesture::LShape => self.state.use_gesture_l = en,
+                    open_360_link_protocol::Gesture::VShape => self.state.use_gesture_v = en,
+                    open_360_link_protocol::Gesture::Rock => self.state.use_gesture_rock = en,
                 }
             }
         }
@@ -325,15 +325,15 @@ impl Insta360App {
             .controller
             .set_all_gestures_enabled(self.state.enable_all_gestures);
         let _ = self.controller.set_gesture_enabled(
-            insta360_link_protocol::Gesture::Palm,
+            open_360_link_protocol::Gesture::Palm,
             self.state.use_gesture_palm,
         );
         let _ = self.controller.set_gesture_enabled(
-            insta360_link_protocol::Gesture::VShape,
+            open_360_link_protocol::Gesture::VShape,
             self.state.use_gesture_v,
         );
         let _ = self.controller.set_gesture_enabled(
-            insta360_link_protocol::Gesture::LShape,
+            open_360_link_protocol::Gesture::LShape,
             self.state.use_gesture_l,
         );
         let _ = self
@@ -412,14 +412,14 @@ impl Insta360App {
             )
             .show(ctx, |ui| {
                 ui.horizontal_centered(|ui| {
-                    // Left: Green Insta360 camera icon + "Insta360 Link Controller" title
+                    // Left: Green camera icon + "Open 360 Link" title
                     ui.label(
                         RichText::new("📷")
                             .color(theme.brand_green)
                             .size(17.0_f32),
                     );
                     ui.label(
-                        RichText::new("Insta360 Link Controller")
+                        RichText::new("Open 360 Link")
                             .strong()
                             .size(14.5_f32)
                             .color(theme.text01),
@@ -1257,7 +1257,7 @@ impl Insta360App {
                                             .changed()
                                         {
                                             let _ = self.controller.set_gesture_enabled(
-                                                insta360_link_protocol::Gesture::Palm,
+                                                open_360_link_protocol::Gesture::Palm,
                                                 self.state.use_gesture_palm,
                                             );
                                         }
@@ -1267,7 +1267,7 @@ impl Insta360App {
                                             .changed()
                                         {
                                             let _ = self.controller.set_gesture_enabled(
-                                                insta360_link_protocol::Gesture::VShape,
+                                                open_360_link_protocol::Gesture::VShape,
                                                 self.state.use_gesture_v,
                                             );
                                         }
@@ -1277,7 +1277,7 @@ impl Insta360App {
                                             .changed()
                                         {
                                             let _ = self.controller.set_gesture_enabled(
-                                                insta360_link_protocol::Gesture::LShape,
+                                                open_360_link_protocol::Gesture::LShape,
                                                 self.state.use_gesture_l,
                                             );
                                         }
@@ -1455,13 +1455,13 @@ impl Insta360App {
                                                 ui.label("Tracking Speed:");
                                                 egui::ComboBox::from_id_salt("tb_track_speed")
                                                     .selected_text(match self.state.track_speed {
-                                                        insta360_link_protocol::TrackSpeed::Fast => {
+                                                        open_360_link_protocol::TrackSpeed::Fast => {
                                                             "Quick"
                                                         }
-                                                        insta360_link_protocol::TrackSpeed::Normal => {
+                                                        open_360_link_protocol::TrackSpeed::Normal => {
                                                             "Ordinary"
                                                         }
-                                                        insta360_link_protocol::TrackSpeed::Slow => {
+                                                        open_360_link_protocol::TrackSpeed::Slow => {
                                                             "Slow"
                                                         }
                                                     })
@@ -1469,37 +1469,37 @@ impl Insta360App {
                                                         if ui
                                                             .selectable_value(
                                                                 &mut self.state.track_speed,
-                                                                insta360_link_protocol::TrackSpeed::Fast,
+                                                                open_360_link_protocol::TrackSpeed::Fast,
                                                                 "Quick",
                                                             )
                                                             .clicked()
                                                         {
                                                             let _ = self.controller.set_track_speed(
-                                                                insta360_link_protocol::TrackSpeed::Fast,
+                                                                open_360_link_protocol::TrackSpeed::Fast,
                                                             );
                                                         }
                                                         if ui
                                                             .selectable_value(
                                                                 &mut self.state.track_speed,
-                                                                insta360_link_protocol::TrackSpeed::Normal,
+                                                                open_360_link_protocol::TrackSpeed::Normal,
                                                                 "Ordinary",
                                                             )
                                                             .clicked()
                                                         {
                                                             let _ = self.controller.set_track_speed(
-                                                                insta360_link_protocol::TrackSpeed::Normal,
+                                                                open_360_link_protocol::TrackSpeed::Normal,
                                                             );
                                                         }
                                                         if ui
                                                             .selectable_value(
                                                                 &mut self.state.track_speed,
-                                                                insta360_link_protocol::TrackSpeed::Slow,
+                                                                open_360_link_protocol::TrackSpeed::Slow,
                                                                 "Slow",
                                                             )
                                                             .clicked()
                                                         {
                                                             let _ = self.controller.set_track_speed(
-                                                                insta360_link_protocol::TrackSpeed::Slow,
+                                                                open_360_link_protocol::TrackSpeed::Slow,
                                                             );
                                                         }
                                                     });
@@ -2307,9 +2307,9 @@ impl eframe::App for Insta360App {
                 let z_read = self.controller.get_zoom().unwrap_or(0);
                 let _ = self.controller.set_zoom(100);
 
-                let _ = self.controller.set_track_speed(insta360_link_protocol::TrackSpeed::Fast);
+                let _ = self.controller.set_track_speed(open_360_link_protocol::TrackSpeed::Fast);
                 let ts_fast = self.controller.get_track_speed().ok();
-                let _ = self.controller.set_track_speed(insta360_link_protocol::TrackSpeed::Normal);
+                let _ = self.controller.set_track_speed(open_360_link_protocol::TrackSpeed::Normal);
                 let ts_norm = self.controller.get_track_speed().ok();
 
                 let _ = self.controller.set_auto_exposure(true);
@@ -2370,7 +2370,7 @@ impl eframe::App for Insta360App {
                 let _ = self.controller.set_all_gestures_enabled(true);
                 let _ = self
                     .controller
-                    .set_gesture_enabled(insta360_link_protocol::Gesture::Palm, true);
+                    .set_gesture_enabled(open_360_link_protocol::Gesture::Palm, true);
                 let gest = self.controller.get_gesture_status().ok();
 
                 println!(
@@ -2569,16 +2569,16 @@ fn main() -> eframe::Result<()> {
     // Matching webcam.qml: width: 1440, height: 714, minimumWidth: 1120, minimumHeight: 536
     let native_options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_app_id("insta360-link-controller")
+            .with_app_id("open-360-link")
             .with_icon(build_app_icon())
             .with_inner_size([1440.0_f32, 714.0_f32])
             .with_min_inner_size([1120.0_f32, 536.0_f32])
-            .with_title("Insta360 Link Controller"),
+            .with_title("Open 360 Link"),
         ..Default::default()
     };
 
     eframe::run_native(
-        "Insta360 Link Controller",
+        "Open 360 Link",
         native_options,
         Box::new(|cc| Ok(Box::new(Insta360App::new(cc)))),
     )

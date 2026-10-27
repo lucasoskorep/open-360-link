@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Open 360 Link
+GenericName=Webcam Controller
+Comment=Open-source hardware PTZ, AI tracking, image settings, and live preview controller for Insta360 Link webcams
+Exec=open-360-link-gui
+TryExec=open-360-link-gui
+Icon=open-360-link
+Terminal=false
+Categories=AudioVideo;Video;
+Keywords=open-360-link;insta360;link;webcam;camera;ptz;gimbal;uvc;video;tracking;
+StartupNotify=true
+StartupWMClass=open-360-link

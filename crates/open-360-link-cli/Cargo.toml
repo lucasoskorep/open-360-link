@@ -1,16 +1,16 @@
 [package]
-name = "insta360-link-cli"
+name = "open-360-link-cli"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Cross-platform CLI controller for Insta360 Link, Link 2, and Link 2C cameras"
+description = "Open 360 Link: Cross-platform CLI controller for Insta360 Link, Link 2, and Link 2C cameras"
 
 [[bin]]
-name = "insta360-link-ctl"
+name = "open-360-link-ctl"
 path = "src/main.rs"
 
 [dependencies]
-insta360-link-protocol = { path = "../insta360-link-protocol" }
+open-360-link-protocol = { path = "../open-360-link-protocol" }
 clap.workspace = true
 serde.workspace = true
 serde_json.workspace = true

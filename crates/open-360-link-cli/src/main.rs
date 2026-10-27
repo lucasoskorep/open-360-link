@@ -1,5 +1,5 @@
 use clap::{ArgAction, Parser, Subcommand, ValueEnum};
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     list_connected_cameras, AudioCaptureMode, CameraModel, CompositionStyle, DeviceInfo,
     DeviceStatus, DiscoveredCamera, ExtendFunction, FilterMode, ForbiddenAreaInfo, Gesture,
     GestureFunction, HostPtzInfo, ImageOperation, Insta360CameraController, MockCameraTransport,
@@ -11,9 +11,9 @@ use std::process::ExitCode;
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "insta360-link-ctl",
+    name = "open-360-link-ctl",
     version,
-    about = "Cross-platform CLI controller for Insta360 Link, Link 2, and Link 2C cameras"
+    about = "Open 360 Link: Cross-platform CLI controller for Insta360 Link, Link 2, and Link 2C cameras"
 )]
 pub struct Cli {
     /// Run against an in-memory simulated camera model instead of physical USB

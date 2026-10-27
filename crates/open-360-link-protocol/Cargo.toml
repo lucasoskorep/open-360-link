@@ -1,9 +1,9 @@
 [package]
-name = "insta360-link-protocol"
+name = "open-360-link-protocol"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Pure-Rust cross-platform UVC & Extension Unit protocol library for Insta360 Link, Link 2, and Link 2C webcams"
+description = "Open 360 Link: Pure-Rust cross-platform UVC & Extension Unit protocol library for Insta360 Link, Link 2, and Link 2C webcams"
 
 [dependencies]
 thiserror.workspace = true

@@ -1830,60 +1830,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "insta360-link-cli"
-version = "0.0.0"
-dependencies = [
- "clap",
- "insta360-link-protocol",
- "serde",
- "serde_json",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "insta360-link-gui"
-version = "0.0.0"
-dependencies = [
- "eframe",
- "egui",
- "image",
- "insta360-link-protocol",
- "serde",
- "serde_json",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "insta360-link-protocol"
-version = "0.0.0"
-dependencies = [
- "bitflags 2.13.2",
- "libc",
- "nusb",
- "serde",
- "serde_json",
- "thiserror 2.0.21",
- "tracing",
-]
-
-[[package]]
-name = "insta360-link-server"
-version = "0.0.0"
-dependencies = [
- "axum",
- "clap",
- "insta360-link-protocol",
- "serde",
- "serde_json",
- "tokio",
- "tower-http",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
 name = "io-kit-sys"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2622,6 +2568,60 @@ name = "once_cell_polyfill"
 version = "1.70.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "384b8ab6d37215f3c5301a95a4accb5d64aa607f1fcb26a11b5303878451b4fe"
+
+[[package]]
+name = "open-360-link-cli"
+version = "0.0.0"
+dependencies = [
+ "clap",
+ "open-360-link-protocol",
+ "serde",
+ "serde_json",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "open-360-link-gui"
+version = "0.0.0"
+dependencies = [
+ "eframe",
+ "egui",
+ "image",
+ "open-360-link-protocol",
+ "serde",
+ "serde_json",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "open-360-link-protocol"
+version = "0.0.0"
+dependencies = [
+ "bitflags 2.13.2",
+ "libc",
+ "nusb",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+ "tracing",
+]
+
+[[package]]
+name = "open-360-link-server"
+version = "0.0.0"
+dependencies = [
+ "axum",
+ "clap",
+ "open-360-link-protocol",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tower-http",
+ "tracing",
+ "tracing-subscriber",
+]
 
 [[package]]
 name = "orbclient"

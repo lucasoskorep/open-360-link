@@ -7,7 +7,7 @@ use axum::{
     routing::{get, post},
     Json, Router,
 };
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     list_connected_cameras, AudioCaptureMode, CameraModel, CompositionStyle, DeviceCapabilities,
     DeviceInfo, DiscoveredCamera, ExtendFunction, FilterMode, ForbiddenAreaInfo, Gesture,
     GestureFunction, HostPtzInfo, Insta360CameraController, MockCameraTransport, NusbTransport,

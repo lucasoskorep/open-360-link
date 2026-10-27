@@ -3,7 +3,7 @@ use crate::state::{
     SHUTTER_DENOM_LIST,
 };
 use egui::{Color32, ColorImage, Context, TextureHandle, TextureOptions};
-use insta360_link_protocol::{TrackSpeed, UvcRect, VideoMode};
+use open_360_link_protocol::{TrackSpeed, UvcRect, VideoMode};
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Child, ChildStdin, Command, Stdio};

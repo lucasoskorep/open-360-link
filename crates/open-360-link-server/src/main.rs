@@ -1,16 +1,16 @@
 use clap::{Parser, ValueEnum};
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     CameraModel, Insta360CameraController, NusbTransport, UvcControlTransport,
 };
-use insta360_link_server::{build_router, new_mock_state, AppState, ServerTransport};
+use open_360_link_server::{build_router, new_mock_state, AppState, ServerTransport};
 use std::net::SocketAddr;
 use std::sync::{Arc, Mutex};
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "insta360-link-server",
+    name = "open-360-link-server",
     version,
-    about = "Cross-platform HTTP REST & WebSocket remote control server for Insta360 Link cameras"
+    about = "Open 360 Link: Cross-platform HTTP REST & WebSocket remote control server for Insta360 Link cameras"
 )]
 struct Cli {
     /// Bind address for HTTP and WebSocket server
@@ -47,7 +47,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt()
         .with_env_filter(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "insta360_link_server=info,tower_http=info".into()),
+                .unwrap_or_else(|_| "open_360_link_server=info,tower_http=info".into()),
         )
         .init();
 

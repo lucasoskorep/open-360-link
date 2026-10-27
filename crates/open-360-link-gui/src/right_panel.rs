@@ -2,7 +2,7 @@ use egui::{
     Align, Align2, Color32, Context, FontId, Grid, Layout, Pos2, Rect, RichText, Rounding,
     ScrollArea, Sense, Stroke, TextEdit, Ui, Vec2,
 };
-use insta360_link_protocol::{
+use open_360_link_protocol::{
     AudioCaptureMode, CameraModel, CompositionStyle, ExposureCurve, FilterMode, HostPtzInfo,
     ImageOperation, Insta360CameraController, PowerLineFrequency, TrackSpeed, UvcControlTransport,
     Gesture,
